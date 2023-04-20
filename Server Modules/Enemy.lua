@@ -1,15 +1,18 @@
 --#region Imports
 
 local ServerScriptService = game:GetService('ServerScriptService')
+local ReplicatedStorage = game:GetService('ReplicatedStorage')
+local PhysicsService = game:GetService('PhysicsService')
 
 local GameEnum = require(ServerScriptService:WaitForChild('Modules').GameEnum)
+local Animator = require(ReplicatedStorage:WaitForChild('Modules').Animator)
 
 --#endregion
 
 local Enemy = {}
 
 
-function Enemy:New(Params: table)
+function Enemy:New(Params)
     
     local Success, Fail = pcall(function()
         
@@ -30,8 +33,20 @@ function Enemy:New(Params: table)
 
                 ReplicatedEnemy.PrimaryPart = ReplicatedEnemy.HumanoidRootPart
                 ReplicatedEnemy:PivotTo(Params.Waypoints['1'])
+                
+                ReplicatedEnemy.Name = Folder.Name
 
-                ReplicatedEnemy.Parent = workspace.Enemies
+                -- Set collision groups and network ownership
+                for i, v in ipairs(ReplicatedEnemy:GetDescendants()) do
+                
+                    if v:IsA('BasePart') then
+
+                        v:SetNetworkOwner(nil)
+                        v.CollisionGroup = "Enemy"
+
+                    end
+
+                end
 
                 Enemy.WalkPath(Params.Waypoints, ReplicatedEnemy.Humanoid)
 
@@ -61,7 +76,7 @@ function Enemy:New(Params: table)
 
 end
 
-function Enemy.WalkPath(Path: Folder, Humanoid: Humanoid)
+function Enemy.WalkPath(Path, Humanoid)
     
     local Success, Fail = pcall(function()
     
