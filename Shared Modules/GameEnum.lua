@@ -12,8 +12,7 @@ local Folder = ReplicatedStorage:WaitForChild('Events')
 
 GameEnum.Events = {
 
-    ['Vote'] = Folder:WaitForChild('Vote'),
-    [''] = Folder:WaitorChild(''),
+    ['Vote'] = Folder:WaitForChild('Vote')
     
 }
 

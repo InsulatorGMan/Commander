@@ -52,7 +52,7 @@ end)
 
 --[[
 
-    author: 
-    date: 
+    author: InsulatorGMan
+    date: April 21st, 2023
 
 ]]
