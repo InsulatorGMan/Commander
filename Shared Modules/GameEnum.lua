@@ -17,6 +17,8 @@ GameEnum.Events = {
     
 }
 
+GameEnum.Values = ReplicatedStorage:WaitForChild('Values')
+
 return GameEnum
 
 --[[

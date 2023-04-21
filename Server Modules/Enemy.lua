@@ -4,7 +4,7 @@ local ServerScriptService = game:GetService('ServerScriptService')
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 local PhysicsService = game:GetService('PhysicsService')
 
-local GameEnum = require(ServerScriptService:WaitForChild('Modules').GameEnum)
+local GameEnum = require(ReplicatedStorage:WaitForChild('Modules').GameEnum)
 local Animator = require(ReplicatedStorage:WaitForChild('Modules').Animator)
 
 --#endregion
@@ -49,6 +49,7 @@ function Enemy:New(Params)
                 end
 
                 Enemy.WalkPath(Params.Waypoints, ReplicatedEnemy.Humanoid)
+
 
                 return ReplicatedEnemy
 
